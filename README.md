@@ -1,3 +1,3 @@
 # mylibft
 Personal work on 42 libft project
-Testing credentials for commits
+Mainly working on functions other than those from piscine
