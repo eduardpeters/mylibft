@@ -12,6 +12,13 @@ SRCS =	ft_putchar.c \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_atoi.c \
+	ft_memalloc.c \
+	ft_memdel.c \
+	ft_strclr.c \
+	ft_strdel.c \
+	ft_striter.c \
+	ft_strnew.c \
+	ft_striteri.c \
 
 OBJS = $(SRCS:.c=.o)
 
