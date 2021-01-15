@@ -19,6 +19,9 @@ SRCS =	ft_putchar.c \
 	ft_striter.c \
 	ft_strnew.c \
 	ft_striteri.c \
+	ft_strlen.c \
+	ft_strcpy.c \
+	ft_strdup.c \
 
 OBJS = $(SRCS:.c=.o)
 

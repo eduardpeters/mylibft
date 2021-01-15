@@ -9,6 +9,9 @@
 ** First Part
 */
 
+char	*ft_strcpy(char *s1, const char *s2);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
 int	ft_atoi(const char *str);
 int	ft_isalpha(int c);
 int	ft_isdigit(int c);
