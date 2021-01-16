@@ -22,6 +22,9 @@ SRCS =	ft_putchar.c \
 	ft_strlen.c \
 	ft_strcpy.c \
 	ft_strdup.c \
+	ft_memset.c \
+	ft_bzero.c \
+	ft_memcpy.c \
 
 OBJS = $(SRCS:.c=.o)
 

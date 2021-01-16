@@ -9,6 +9,9 @@
 ** First Part
 */
 
+void	*ft_memcpy(void *s1, const void *s2,  size_t n);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strcpy(char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
