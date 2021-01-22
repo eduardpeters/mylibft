@@ -21,6 +21,8 @@ SRCS =	ft_putchar.c \
 	ft_striteri.c \
 	ft_strlen.c \
 	ft_strcpy.c \
+	ft_strlcpy.c \
+	ft_strlcat.c \
 	ft_strdup.c \
 	ft_memset.c \
 	ft_bzero.c \
