@@ -3,6 +3,16 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+char	fi(unsigned int index, char c)
+{
+	if (index % 2 == 0)
+		return (c + 1);
+	else if (index % 3 == 0)
+		return ('$');
+	else
+		return (c);
+}
+
 int main(void)
 {
 	int		fd;
@@ -10,6 +20,11 @@ int main(void)
 	char	*substr;
 	char	*joined;
 	char	*trimmed;
+	char	str[] = ".hola...mundo.42..final.";
+	char	c;
+	char	**tab;
+	int		i;
+	char	str2[] = "JJJJJJJJJJJJJJ";
 	
 	printf("Subs from: %s\n", str1);
 	substr = ft_substr(str1, 2, 10);
@@ -41,5 +56,21 @@ int main(void)
 	ft_putendl_fd(", world!", fd);
 	printf("Now writing -42 to file\n");
 	ft_putnbr_fd(-42, fd);
-	close(fd);
+	close(fd);	
+	i = 0;
+	c = '.';
+	printf("Splitting: ->%s<- with delimeter: ->%c<-\n", str, c);
+	tab = ft_split(str, c);
+	while (tab[i])
+	{
+		printf("Word %d is: %s\n", i, tab[i]);
+		i++;
+	}
+	if (tab[i] == 0)
+		printf("Last index is zero\n");
+	free(tab);
+	printf("Applying fi to: %s\n", str2);
+	substr = ft_strmapi(str2, &fi);
+	printf("%s becomes %s\n", str2, substr);
+	free(substr);
 }
