@@ -14,23 +14,9 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char			str[12];
-	unsigned int	digits;
-	unsigned int	u_nbr;
+	char *str;
 
-	digits = n < 0 ? 3 : 2;
-	u_nbr = n < 0 ? (unsigned int)(n * -1) : (unsigned int)(n);
-	while ((u_nbr = u_nbr / 10))
-		digits++;
-	u_nbr = n < 0 ? (unsigned int)(n * -1) : (unsigned int)(n);
-	str[digits - 1] = '\0';
-	digits -= 2;
-	while (digits > 0)
-	{
-		str[digits] = '0' + (u_nbr % 10);
-		u_nbr = u_nbr / 10;
-		digits--;
-	}
-	str[digits] = n < 0 ? '-' : '0' + (u_nbr % 10);
+	str = ft_itoa(n);
 	ft_putstr_fd(str, fd);
+	free(str);
 }
