@@ -43,7 +43,7 @@ int main(void)
 	printf("Result: %s\n", trimmed);
 	free(trimmed);
 	printf("Trimming *!*&!1**&*\n");
-	trimmed = ft_strtrim("  *!*&!1**&*  ", "* !&");
+	trimmed = ft_strtrim("*!*&!1**&* ", "* !&");
 	printf("Result: %s\n", trimmed);
 	free(trimmed);
 	fd = open("testfile", O_WRONLY | O_CREAT | O_TRUNC, 0777);

@@ -93,4 +93,16 @@ int	main(void)
 	printf("Testing strncmp: %d\n", strncmp("abc", "abz", 6));
 	printf("Testing ft_atoi: %d\n", ft_atoi(" 	97.654"));
 	printf("Testing atoi: %d\n", atoi(" 	97.654"));
+	char str3[50] = "I am going from Delhi to Gorakhpur";
+    printf( "Testing: ft_memmove with overlap\n" );
+    printf( "Original: %s\n",str3);
+    printf( "Source: %s\n", str3 + 5);
+    printf( "Destination: %s\n", str3 + 11);
+    ft_memmove(str3 + 11, str3 + 5, 29);
+    printf( "Result: %s\n", str3);
+	char str4[50] = "I am going from Delhi to Gorakhpur";
+    printf( "Testing: memmove with overlap\n" );
+    memmove(str4 + 11, str4 + 5, 29);
+    printf( "Result: %s\n", str4 );
+    return 0;
 }
