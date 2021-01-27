@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epeters- <epeters-@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/27 08:16:11 by epeters-          #+#    #+#             */
-/*   Updated: 2021/01/27 11:12:48 by epeters-         ###   ########.fr       */
+/*   Created: 2021/01/27 15:09:45 by epeters-          #+#    #+#             */
+/*   Updated: 2021/01/27 15:23:21 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	head = NULL;
 	while (lst)
 	{
-		new = ft_lstnew(f(lst->content));
+		new = ft_lstnew((*f)(lst->content));
 		if (!new)
 		{
 			ft_lstclear(&head, del);

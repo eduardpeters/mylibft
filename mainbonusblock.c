@@ -4,28 +4,38 @@
 
 void	*ft_content(void *s)
 {
-	void	*result;
+	char	*result;
 	int		i;
+	char	*ptr_s;
 
-	result = ft_calloc(1, ft_strlen(s));
-	ft_memcpy(result, s, ft_strlen(s));
+	ptr_s = (char *)(s);
+	result = ft_strdup(ptr_s);
 	i = 0;
-	while (*(char *)(s + i))
+	while (*(ptr_s + i))
 	{
-		printf("i es: %d\n", i);
-		*(char *)(result + i) = *(char *)(s + i) + 1;
-		printf("Pasa de: %c\n", *(char *)(s + i));
-		printf("A ser: %c\n", (*(char *)(s + i)) + 1);
-		printf("Escribe: %c\n", *(char *)(result + i));
+		*(result + i) = *(ptr_s + i) - 1;
 		i++;
 	}
-	return (result);
+	return ((void *)(result));
 }
 
 void	ft_del(void *s)
 {
 	if (s)
 		free(s);
+}
+
+void	ft_iter(void *s)
+{
+	char	*ptr_s;
+
+	ptr_s = (char *)(s);
+
+	while (*ptr_s)
+	{
+		*ptr_s = *ptr_s + 1;
+		ptr_s++;
+	}
 }
 
 void	ft_printlist(t_list *lst)
@@ -39,17 +49,13 @@ void	ft_printlist(t_list *lst)
 
 int main(void)
 {
-	char	*str= ft_strdup("Exists");
-	char	*str1 = ft_strdup("Me:");
-	char	*str2 = ft_strdup("Or Not");
+	printf("**LIBFT TESTS BONUS**\n");
+
+	printf("\nTesting LSTNEW:\n");
+	char	*str= ft_strdup("I was here first");
+	char	*str1 = ft_strdup("I showed up afterwards");
 	t_list	*mylist;
 	t_list	*addlist;
-	t_list	*backlist;
-	t_list	**start;
-	t_list	**startcpy;
-	t_list	**end;
-	t_list	*newlst;
-	
 	printf("Creating list, adding: %s as content\n", str);
 	mylist = ft_lstnew(str);
 	printf("List pointer: %p\n", mylist);
@@ -60,42 +66,64 @@ int main(void)
 	printf("List pointer: %p\n", addlist);
 	printf("List content: %s\n", addlist->content);
 	printf("Next element: %p\n", addlist->next);
+
+	printf("\nTesting LSTADDFRONT:\n");
+	t_list	**start;
 	start = &mylist;
-	//start = NULL;
-	end = &mylist;
-	*end = ft_lstlast(*start);
-	startcpy = start;
-	printf("startcpy: %p\n", *startcpy);
-	//end = NULL;
-	//printf("%p\n", start);
-	//printf("%p\n", *start);
-	printf("Initial list size: %d\n", ft_lstsize(*start));
 	printf("Adding last list to the front of first...\n");
 	ft_lstadd_front(start, addlist);
-	printf("startcpy: %p\n", *startcpy);
+	ft_printlist(*start);
+
+	printf("\n\nTesting LSTSIZE:\n");
 	printf("Current list size: %d\n", ft_lstsize(*start));
-	printf("Final content: %s\n", (*end)->content);
-	printf("Adding new final element to the list\n");
+	
+	printf("\nTesting LSTLAST:\n");
+	t_list	*end;
+	end = ft_lstlast(*start);
+	printf("List pointer: %p\n", end);
+	printf("List content: %s\n", end->content);
+	printf("Next element: %p\n", end->next);
+
+	printf("\nTesting LSTADDBACK:\n");
+	char	*str2 = ft_strdup("I was late to the party");
+	t_list	*backlist;
 	backlist = ft_lstnew(str2);
 	ft_lstadd_back(start, backlist);
 	printf("Current list size: %d\n", ft_lstsize(*start));
-	printf("%p\n", mylist);
-	startcpy = start;
-	printf("startcpy: %p\n", *startcpy);
-	printf("start: %p\n", *start);
-	printf("startcpy: %p\n", *startcpy);
+	ft_printlist(*start);
+
+	printf("\n\nTesting LSTSDELONE:\n");
+	t_list	*dellst;
+	void	(*ptrdel)(void *);
+	char	*str3 = ft_strdup("I was late to the party");
+	dellst = ft_lstnew(str3);
+	ptrdel = &ft_del;
+	printf("Creating new element...\n");
+	printf("List pointer: %p\n", dellst);
+	printf("List content: %s\n", dellst->content);
+	printf("Next element: %p\n", dellst->next);
+	printf("Deleting...\n");
+	ft_lstdelone(dellst, ptrdel);
+	printf("List pointer: %p\n", dellst);
+	printf("List content: %s\n", dellst->content);
+	printf("Next element: %p\n", dellst->next);
+
+	printf("\nTesting LSTITER\n");
+	printf("Applying ft_iter to list\n");
+	ft_lstiter(*start, &ft_iter);
+	ft_printlist(*start);
+
+	printf("\n\nTesting LSTMAP\n");
+	t_list	*newlst;
 	newlst = ft_lstmap(*start, &ft_content, &ft_del);
 	ft_printlist(*start);
+	printf("\n");
 	ft_printlist(newlst);
-	//ft_lstdelone(backlist, &ft_del);
+	
+	printf("\n\nTesting LSTCLEAR\n");
 	ft_lstclear(start, &ft_del);
 	ft_lstclear(&newlst, &ft_del);
 	ft_printlist(*start);
 	ft_printlist(newlst);
-	printf("\n%p\n", mylist);
-	printf("%p\n", addlist);
-	printf("%p\n", backlist);
-	//free(mylist);
-	//free(addlist);
-	//free(backlist);
+	printf("Deletion complete!\n");
 }
