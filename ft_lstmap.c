@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 16:03:51 by epeters-          #+#    #+#             */
-/*   Updated: 2021/01/27 10:33:22 by epeters-         ###   ########.fr       */
+/*   Created: 2021/01/27 08:16:11 by epeters-          #+#    #+#             */
+/*   Updated: 2021/01/27 11:12:48 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
+	t_list	*head;
+	t_list	*new;
 
-	if (dst && src)
+	if (!f || !del)
+		return (NULL);
+	head = NULL;
+	while (lst)
 	{
-		i = 0;
-		while (i < n)
+		new = ft_lstnew(f(lst->content));
+		if (!new)
 		{
-			*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
-			i++;
+			ft_lstclear(&head, del);
+			return (head);
 		}
+		ft_lstadd_back(&head, new);
+		lst = lst->next;
 	}
-	return (dst);
+	return (head);
 }

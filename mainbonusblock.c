@@ -2,6 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void	*ft_content(void *s)
+{
+	void	*result;
+	int		i;
+
+	result = ft_calloc(1, ft_strlen(s));
+	ft_memcpy(result, s, ft_strlen(s));
+	i = 0;
+	while (*(char *)(s + i))
+	{
+		printf("i es: %d\n", i);
+		*(char *)(result + i) = *(char *)(s + i) + 1;
+		printf("Pasa de: %c\n", *(char *)(s + i));
+		printf("A ser: %c\n", (*(char *)(s + i)) + 1);
+		printf("Escribe: %c\n", *(char *)(result + i));
+		i++;
+	}
+	return (result);
+}
+
 void	ft_del(void *s)
 {
 	if (s)
@@ -28,6 +48,7 @@ int main(void)
 	t_list	**start;
 	t_list	**startcpy;
 	t_list	**end;
+	t_list	*newlst;
 	
 	printf("Creating list, adding: %s as content\n", str);
 	mylist = ft_lstnew(str);
@@ -61,13 +82,17 @@ int main(void)
 	printf("%p\n", mylist);
 	startcpy = start;
 	printf("startcpy: %p\n", *startcpy);
-	ft_printlist(*start);
 	printf("start: %p\n", *start);
 	printf("startcpy: %p\n", *startcpy);
+	newlst = ft_lstmap(*start, &ft_content, &ft_del);
+	ft_printlist(*start);
+	ft_printlist(newlst);
 	//ft_lstdelone(backlist, &ft_del);
 	ft_lstclear(start, &ft_del);
+	ft_lstclear(&newlst, &ft_del);
 	ft_printlist(*start);
-	printf("%p\n", mylist);
+	ft_printlist(newlst);
+	printf("\n%p\n", mylist);
 	printf("%p\n", addlist);
 	printf("%p\n", backlist);
 	//free(mylist);
